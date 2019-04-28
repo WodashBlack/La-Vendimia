@@ -1,0 +1,92 @@
+
+    --BD escuela
+    --tabla alumnos
+  CREATE TABLE alumnos(
+    	idAlumno int  AUTO_INCREMENT,
+    	nombre varchar(30),
+    	apellidoPaterno varchar(50),
+    	apellidoMaterno varchar(50),
+    	PRIMARY KEY (idAlumno)
+
+    );
+  
+  CREATE TABLE escuela.alumnos( 
+  	idAlumno INT NULL AUTO_INCREMENT , 
+  	nombre VARCHAR(30) NULL ,
+  	apellidoPaterno VARCHAR(50) NULL , 
+  	apellidoMaterno VARCHAR(50) NULL , 
+  	PRIMARY KEY (idAlumno)
+  	);
+  
+  CREATE TABLE escuela.asignatura( 
+  	idAsignatura INT NULL AUTO_INCREMENT , 
+  	nombreAsignatura VARCHAR(50) NOT NULL , 
+  	PRIMARY KEY (idAsignatura)
+  	);
+
+ CREATE TABLE escuela.calificaciones( 
+ 	idAlumno INT NULL ,
+   	idAsignatura INT NULL , 
+   	calificacion FLOAT NULL,
+   	FOREIGN KEY(idAlumno) REFERENCES alumnos(idAlumno),
+   	FOREIGN KEY(idAsignatura) REFERENCES asignatura(idAsignatura)
+    );
+
+   CREATE TABLE asignatura(
+       	idAsignatura int  AUTO_INCREMENT,
+       	nombreAsignatura varchar(50),
+   		PRIMARY KEY (idAlumno)
+   	);
+
+    CREATE TABLE calificaciones(
+        idAlumno int NOT NULL,
+        idAsignatura NOT NULL,
+    	calificacion float,
+    	FOREIGN KEY (idAlumno) REFERENCES alumnos(idAlumno),
+    	FOREIGN KEY (idAsignatura) REFERENCES asignatura(idAsignatura)
+    );
+
+    insert into alumnos(nombre,apellidoPaterno,apellidoMaterno) values('Juanito', 'Nieve','Lopez');
+    insert into alumnos(nombre,apellidoPaterno,apellidoMaterno) values('Gonzalo', 'Stark','Perez');
+    insert into alumnos(nombre,apellidoPaterno,apellidoMaterno) values('Jose', 'Bozzo','Gomez');
+    insert into alumnos(nombre,apellidoPaterno,apellidoMaterno) values('Alfredo', 'Mistico','Porto');
+    insert into alumnos(nombre,apellidoPaterno,apellidoMaterno) values('Jesus', 'Soto','Urias');
+
+ 
+
+    insert into asignatura (nombreAsignatura) values('Matematicas');
+    insert into asignatura (nombreAsignatura) values('Quimica');
+    insert into asignatura (nombreAsignatura) values('Geografia');
+    insert into asignatura (nombreAsignatura) values('Psicologia');
+    insert into asignatura (nombreAsignatura) values('Redes');
+
+
+
+    insert into calificaciones (idAlumno, idAsignatura, calificacion ) values(1,1,10);
+    insert into calificaciones (idAlumno, idAsignatura, calificacion ) values(1,2,7);
+    insert into calificaciones (idAlumno, idAsignatura, calificacion ) values(1,3,9);
+    insert into calificaciones (idAlumno, idAsignatura, calificacion ) values(1,4,9);
+
+    insert into calificaciones (idAlumno, idAsignatura, calificacion ) values(2,1,10);
+   	insert into calificaciones (idAlumno, idAsignatura, calificacion ) values(2,2,10);
+    insert into calificaciones (idAlumno, idAsignatura, calificacion ) values(2,3,10);
+    insert into calificaciones (idAlumno, idAsignatura, calificacion ) values(2,4,10);
+
+    insert into calificaciones (idAlumno, idAsignatura, calificacion ) values(3,1,9);
+   	insert into calificaciones (idAlumno, idAsignatura, calificacion ) values(3,2,9);
+    insert into calificaciones (idAlumno, idAsignatura, calificacion ) values(3,3,8);
+    insert into calificaciones (idAlumno, idAsignatura, calificacion ) values(3,4,10);
+
+    insert into calificaciones (idAlumno, idAsignatura, calificacion ) values(4,4,8);
+   	insert into calificaciones (idAlumno, idAsignatura, calificacion ) values(4,4,8);
+    insert into calificaciones (idAlumno, idAsignatura, calificacion ) values(4,4,8);
+    insert into calificaciones (idAlumno, idAsignatura, calificacion ) values(4,4,8);
+
+    insert into calificaciones (idAlumno, idAsignatura, calificacion ) values(2,4,7);
+   	insert into calificaciones (idAlumno, idAsignatura, calificacion ) values(2,4,8);
+    insert into calificaciones (idAlumno, idAsignatura, calificacion ) values(2,4,9);
+    insert into calificaciones (idAlumno, idAsignatura, calificacion ) values(2,4,7);
+
+   
+   select sum(calificacion) AS PROMEDIO,idAlumno from calificaciones group by idAlumno order by PROMEDIO desc limit 10
+
